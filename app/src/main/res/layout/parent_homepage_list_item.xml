@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginEnd="10dp"
+    app:cardCornerRadius="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/homePageIconSize"
+            android:layout_height="@dimen/homePageIconSize"
+            android:layout_marginTop="@dimen/homepageIconsTopMargin"
+            android:layout_gravity="center"
+            tools:srcCompat="@drawable/invoices" />
+
+        <TextView
+            android:id="@+id/mainLabel"
+            style="@style/mainLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/homepageMarginBetweenIconAndLabel"
+            android:gravity="center"
+            android:text="Daily Activities" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

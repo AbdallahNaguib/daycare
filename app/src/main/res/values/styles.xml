@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="subLabel">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#B1000000</item>
+    </style>
+    <style name="mainLabel">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+</resources>

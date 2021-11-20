@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginLayoutStart">12dp</dimen>
+    <dimen name="marginLayoutTop">12dp</dimen>
+    <dimen name="homepageMarginBetweenIconAndLabel">12dp</dimen>
+    <dimen name="marginHomePageListTop">40dp</dimen>
+    <dimen name="homepageIconsTopMargin">12dp</dimen>
+    <dimen name="homePageIconSize">80dp</dimen>
+    <dimen name="homePageCardMargin">10dp</dimen>
+    <dimen name="homePageCardRadius">60dp</dimen>
+</resources>
