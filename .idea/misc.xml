@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.32407407407407407" />
         <entry key="app/src/main/res/layout/activity_main_parent.xml" value="0.33" />
         <entry key="app/src/main/res/layout/homepage_fragment.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/list_activities_fragment.xml" value="0.31521739130434784" />
         <entry key="app/src/main/res/layout/parent_homepage_list_item.xml" value="0.30932971014492755" />
       </map>
     </option>

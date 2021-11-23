@@ -1,4 +1,4 @@
-package com.example.daycare.parent.adapters
+package com.example.daycare.ui.parent.adapters
 
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.daycare.R
-import com.example.daycare.models.HomePageAction
+import com.example.daycare.ui.models.HomePageAction
 
 class HomePageAdapter(private val homepageActions:List<HomePageAction>) : RecyclerView.Adapter<HomePageAdapter.ViewHolder>() {
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {

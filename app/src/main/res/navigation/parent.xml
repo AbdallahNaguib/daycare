@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.example.daycare.parent.fragments.HomePageFragment"
+        android:name="com.example.daycare.ui.parent.fragments.HomePageFragment"
         android:label="CreateAuditFragment"
         tools:layout="@layout/homepage_fragment" />
 </navigation>
