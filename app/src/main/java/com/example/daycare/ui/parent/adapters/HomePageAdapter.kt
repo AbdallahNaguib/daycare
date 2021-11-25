@@ -10,8 +10,9 @@ import android.widget.TextView
 import com.example.daycare.R
 import com.example.daycare.ui.models.HomePageAction
 
-class HomePageAdapter(private val homepageActions:List<HomePageAction>) : RecyclerView.Adapter<HomePageAdapter.ViewHolder>() {
-    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class HomePageAdapter(private val homepageActions:List<HomePageAction>) :
+    RecyclerView.Adapter<HomePageAdapter.ViewHolder>() {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val icon:ImageView = view.findViewById(R.id.icon)
         val mainLabel:TextView = view.findViewById(R.id.mainLabel)
     }
@@ -26,6 +27,9 @@ class HomePageAdapter(private val homepageActions:List<HomePageAction>) : Recycl
         val item = homepageActions[position]
         holder.icon.setBackgroundResource(item.icon)
         holder.mainLabel.text = item.mainLabel
+        holder.itemView.setOnClickListener {
+            item.onClick?.invoke()
+        }
     }
 
     override fun getItemCount() = homepageActions.size

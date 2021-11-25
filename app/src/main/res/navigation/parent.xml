@@ -9,5 +9,14 @@
         android:id="@+id/homePageFragment"
         android:name="com.example.daycare.ui.parent.fragments.HomePageFragment"
         android:label="CreateAuditFragment"
-        tools:layout="@layout/homepage_fragment" />
+        tools:layout="@layout/homepage_fragment" >
+        <action
+            android:id="@+id/action_homePageFragment_to_listActivitiesFragment"
+            app:destination="@id/listActivitiesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listActivitiesFragment"
+        android:name="com.example.daycare.ui.parent.fragments.ListActivitiesFragment"
+        android:label="ListActivitiesFragment"
+        tools:layout="@layout/list_activities_fragment"/>
 </navigation>
