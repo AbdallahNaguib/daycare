@@ -24,6 +24,7 @@ class ActivitesListAdapter(val data: List<Activity>) :
         holder.time.text = item.time
         holder.date.text = item.date
         holder.type.text = item.type
+        holder.child.text = item.getChild()?.name
     }
 
     override fun getItemCount() = data.size

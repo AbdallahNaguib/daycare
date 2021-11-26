@@ -5,6 +5,7 @@ import com.example.daycare.data.network.APIs.ProfileApi
 import com.example.daycare.data.preferences.Preferences
 import com.example.daycare.data.reporsitories.ActivitesRepositoryImpl
 import com.example.daycare.data.reporsitories.ProfileRepositoryImpl
+import com.example.daycare.domain.models.Child
 import com.example.daycare.domain.models.Parent
 import com.example.daycare.domain.models.Unknown
 import com.example.daycare.domain.repositories.ActivitesRepository
@@ -35,6 +36,7 @@ object AppModule {
     fun adapterFactory() = ResourceAdapterFactory.builder()
         .add(Parent::class.java)
         .add(Unknown::class.java)
+        .add(Child::class.java)
         .build()
 
     @Singleton

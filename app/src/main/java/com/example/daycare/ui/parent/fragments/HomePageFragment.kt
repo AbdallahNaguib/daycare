@@ -38,18 +38,20 @@ class HomePageFragment : DayCareFragment<HomepageFragmentBinding, HomePageViewMo
     }
 
     private fun initActionsList() {
-        actionsList.add(HomePageAction(R.drawable.activities, "Daily Activities") {
-            navigateToActivites()
-        })
-        actionsList.add(HomePageAction(R.drawable.my_children, "My children"))
-        actionsList.add(HomePageAction(R.drawable.absences, "Absences"))
-        actionsList.add(HomePageAction(R.drawable.certificates, "Certificates"))
-        actionsList.add(HomePageAction(R.drawable.learning_material, "Learning Material"))
-        actionsList.add(HomePageAction(R.drawable.online_class, "Online Sessions"))
-        actionsList.add(HomePageAction(R.drawable.invoices, "Invoices"))
-        actionsList.add(HomePageAction(R.drawable.calender, "Calendar"))
-        actionsList.add(HomePageAction(R.drawable.event, "Events"))
-        actionsList.add(HomePageAction(R.drawable.posts, "Posts"))
+        if (actionsList.isEmpty()) {
+            actionsList.add(HomePageAction(R.drawable.activities, "Daily Activities") {
+                navigateToActivites()
+            })
+            actionsList.add(HomePageAction(R.drawable.my_children, "My children"))
+            actionsList.add(HomePageAction(R.drawable.absences, "Absences"))
+            actionsList.add(HomePageAction(R.drawable.certificates, "Certificates"))
+            actionsList.add(HomePageAction(R.drawable.learning_material, "Learning Material"))
+            actionsList.add(HomePageAction(R.drawable.online_class, "Online Sessions"))
+            actionsList.add(HomePageAction(R.drawable.invoices, "Invoices"))
+            actionsList.add(HomePageAction(R.drawable.calender, "Calendar"))
+            actionsList.add(HomePageAction(R.drawable.event, "Events"))
+            actionsList.add(HomePageAction(R.drawable.posts, "Posts"))
+        }
     }
 
     private fun navigateToActivites() {
