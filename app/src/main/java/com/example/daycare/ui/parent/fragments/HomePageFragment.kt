@@ -8,7 +8,7 @@ import com.example.daycare.Constants
 import com.example.daycare.R
 import com.example.daycare.data.network.APIs.ProfileApi
 import com.example.daycare.databinding.HomepageFragmentBinding
-import com.example.daycare.domain.models.User
+import com.example.daycare.domain.models.Parent
 import com.example.daycare.ui.models.HomePageAction
 import com.example.daycare.ui.parent.adapters.HomePageAdapter
 import com.example.daycare.ui.parent.viewmodels.HomePageViewModel
@@ -58,17 +58,17 @@ class HomePageFragment : DayCareFragment<HomepageFragmentBinding>(R.layout.homep
     }
 
     private fun loadUserProfile() {
-        viewModel.userLiveData.observe(viewLifecycleOwner) {
+        viewModel.parentLiveData.observe(viewLifecycleOwner) {
             binding.userName.text = it.name
             setProfilePic(it)
         }
         viewModel.loadProfile()
     }
 
-    private fun setProfilePic(user: User) {
+    private fun setProfilePic(parent: Parent) {
         Glide
             .with(this)
-            .load(Constants.IMAGE_URL(user.tenant!!,"small",user.image))
+            .load(Constants.IMAGE_URL(parent.tenant!!,"small",parent.image))
             .centerCrop()
             .into(binding.profilePic)
     }
