@@ -14,14 +14,7 @@ class LoadProfileUseCase @Inject constructor(private val profileRepository: Prof
     fun execute(handler: ServerResponseUnauthorizedHandler,onSuccess: (Parent?) -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
             val response = profileRepository.loadProfile().await()
-            if (response.isSuccessful){
-                val user = response.body()?.data
-                user?.tenant = response.body()?.tenant
-                onSuccess(user)
-            }
-            else{
-                sendErrorCode(response, handler)
-            }
+            onSuccess(response)
         }
     }
 }

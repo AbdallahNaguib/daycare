@@ -1,9 +1,13 @@
 package com.example.daycare
 
+import com.example.daycare.data.network.APIs.ActivitiesApi
 import com.example.daycare.data.network.APIs.ProfileApi
 import com.example.daycare.data.preferences.Preferences
+import com.example.daycare.data.reporsitories.ActivitesRepositoryImpl
 import com.example.daycare.data.reporsitories.ProfileRepositoryImpl
 import com.example.daycare.domain.models.Parent
+import com.example.daycare.domain.models.Unknown
+import com.example.daycare.domain.repositories.ActivitesRepository
 import com.example.daycare.domain.repositories.ProfileRepository
 import com.example.daycare.moshiJsonapi.core.ResourceAdapterFactory
 import com.example.daycare.moshiJsonapi.retrofitConverter.JsonApiConverterFactory
@@ -30,6 +34,7 @@ object AppModule {
     @Provides
     fun adapterFactory() = ResourceAdapterFactory.builder()
         .add(Parent::class.java)
+        .add(Unknown::class.java)
         .build()
 
     @Singleton
@@ -50,8 +55,19 @@ object AppModule {
     @Provides
     fun profileApi(retrofit: Retrofit) =  retrofit.create(ProfileApi::class.java)
 
+    @Singleton
+    @Provides
+    fun activitesApi(retrofit: Retrofit) =  retrofit.create(ActivitiesApi::class.java)
+
+    @Singleton
     @Provides
     fun profileRepository(preferences: Preferences,profileApi: ProfileApi): ProfileRepository{
         return ProfileRepositoryImpl(profileApi,preferences)
+    }
+
+    @Singleton
+    @Provides
+    fun activitiesRepository(preferences: Preferences,activitiesApi: ActivitiesApi): ActivitesRepository{
+        return ActivitesRepositoryImpl(activitiesApi,preferences)
     }
 }

@@ -1,6 +1,5 @@
 package com.example.daycare.ui.parent.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -16,16 +15,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomePageFragment : DayCareFragment<HomepageFragmentBinding>(R.layout.homepage_fragment) {
+class HomePageFragment : DayCareFragment<HomepageFragmentBinding, HomePageViewModel>(
+    R.layout.homepage_fragment,
+    HomePageViewModel::class.java
+) {
     var actionsList = ArrayList<HomePageAction>()
     lateinit var homePageAdapter: HomePageAdapter
-    lateinit var viewModel: HomePageViewModel
 
     @Inject
     lateinit var profileApi: ProfileApi
 
     override fun doOnCreateView() {
-        viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)
         initActionsList()
         initActionsAdapter()
         loadUserProfile()
@@ -66,10 +66,12 @@ class HomePageFragment : DayCareFragment<HomepageFragmentBinding>(R.layout.homep
     }
 
     private fun setProfilePic(parent: Parent) {
-        Glide
-            .with(this)
-            .load(Constants.IMAGE_URL(parent.tenant!!,"small",parent.image))
-            .centerCrop()
-            .into(binding.profilePic)
+        if (parent.image != null)
+            Glide
+                .with(this)
+                // todo change demo to the real tenant
+                .load(Constants.IMAGE_URL("demo", "small", parent.image!!))
+                .centerCrop()
+                .into(binding.profilePic)
     }
 }

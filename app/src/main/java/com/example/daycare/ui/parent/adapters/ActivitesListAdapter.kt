@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.daycare.R
-import com.example.daycare.ui.models.Activity
+import com.example.daycare.domain.models.Activity
 
 class ActivitesListAdapter(val data: List<Activity>) :
     MyBaseAdapter<ActivitesListAdapter.ViewHolder>(R.layout.activities_list_item) {
@@ -21,10 +21,8 @@ class ActivitesListAdapter(val data: List<Activity>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.child.text = item.child
+        holder.time.text = item.time
         holder.date.text = item.date
-        holder.temp.text = item.temp
-        holder.time.text = item.startTime
         holder.type.text = item.type
     }
 
