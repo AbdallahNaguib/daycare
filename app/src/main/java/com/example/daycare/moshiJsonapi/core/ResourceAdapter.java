@@ -68,8 +68,10 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
                     resource.setType(nextNullableString(reader));
                     break;
                 case "attributes":
-                case "relationships":
                     readFields(reader, resource);
+                    break;
+                case "relationships":
+                    readRelation(reader, resource);
                     break;
                 case "meta":
                     resource.setMeta(nextNullableObject(reader, jsonBufferJsonAdapter));
@@ -100,6 +102,19 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
     }
 
     private void readFields(JsonReader reader, Object resource) throws IOException {
+        reader.beginObject();
+        while (reader.hasNext()) {
+            FieldAdapter fieldAdapter = bindings.get(reader.nextName());
+            if (fieldAdapter != null) {
+                fieldAdapter.readFrom(reader, resource);
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+    }
+
+    private void readRelation(JsonReader reader, Object resource) throws IOException {
         reader.beginObject();
         while (reader.hasNext()) {
             FieldAdapter fieldAdapter = bindings.get(reader.nextName());
@@ -176,6 +191,10 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
 
         void readFrom(JsonReader reader, Object object) throws IOException {
             set(object, nextNullableObject(reader, adapter));
+        }
+
+        void readFromRelation(JsonReader reader, Object object) throws IOException {
+
         }
 
         void writeTo(JsonWriter writer, Object object) throws IOException {
