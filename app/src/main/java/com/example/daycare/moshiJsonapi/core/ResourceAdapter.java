@@ -119,7 +119,7 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
         while (reader.hasNext()) {
             FieldAdapter fieldAdapter = bindings.get(reader.nextName());
             if (fieldAdapter != null) {
-                fieldAdapter.readFrom(reader, resource);
+                fieldAdapter.readFromRelation(reader, resource);
             } else {
                 reader.skipValue();
             }
@@ -194,7 +194,22 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
         }
 
         void readFromRelation(JsonReader reader, Object object) throws IOException {
+            try {
+                Object target = field.get(object);
+                nextNullableRelationObject(reader, target);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
 
+        void nextNullableRelationObject(JsonReader reader, Object resource) throws IOException {
+            if (reader.peek() == JsonReader.Token.NULL) {
+                reader.skipValue();
+            } else {
+                if (adapter instanceof ResourceAdapter<?>) {
+                    ((ResourceAdapter) adapter).readFields(reader, resource);
+                }
+            }
         }
 
         void writeTo(JsonWriter writer, Object object) throws IOException {

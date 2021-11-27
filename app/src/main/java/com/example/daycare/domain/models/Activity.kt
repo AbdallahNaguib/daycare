@@ -8,7 +8,6 @@ import com.example.daycare.moshiJsonapi.core.Resource
 class Activity : Resource() {
     var date: String? = null
     var time: String? = null
-    private var child:HasOne<Child>? = null
+    var child:Child = Child()
 
-    fun getChild() = child?.get(document)
 }
