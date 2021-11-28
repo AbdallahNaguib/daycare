@@ -150,7 +150,7 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
         }
     }
 
-    private static List<Field> listFields(Class<?> type, Class<?> baseType) {
+    static List<Field> listFields(Class<?> type, Class<?> baseType) {
         List<Field> fields = new ArrayList<>();
         Class<?> clazz = type;
         while (clazz != baseType) {

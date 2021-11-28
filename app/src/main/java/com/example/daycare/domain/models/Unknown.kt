@@ -5,4 +5,4 @@ import com.example.daycare.moshiJsonapi.core.Resource
 
 
 @JsonApi(type = "default")
-internal class Unknown : Resource()
+class Unknown : Resource()

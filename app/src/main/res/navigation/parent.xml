@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_homePageFragment_to_listActivitiesFragment"
             app:destination="@id/listActivitiesFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_listChildrenFragment"
+            app:destination="@id/listChildrenFragment" />
     </fragment>
     <fragment
         android:id="@+id/listActivitiesFragment"
         android:name="com.example.daycare.ui.parent.fragments.ListActivitiesFragment"
         android:label="ListActivitiesFragment"
         tools:layout="@layout/list_activities_fragment"/>
+    <fragment
+        android:id="@+id/listChildrenFragment"
+        android:name="com.example.daycare.ui.parent.fragments.ListChildrenFragment"
+        android:label="ListChildrenFragment"
+        />
 </navigation>

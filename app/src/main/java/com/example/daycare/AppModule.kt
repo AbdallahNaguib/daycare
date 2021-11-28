@@ -1,14 +1,16 @@
 package com.example.daycare
 
 import com.example.daycare.data.network.APIs.ActivitiesApi
+import com.example.daycare.data.network.APIs.ChildrenApi
 import com.example.daycare.data.network.APIs.ProfileApi
 import com.example.daycare.data.preferences.Preferences
 import com.example.daycare.data.reporsitories.ActivitesRepositoryImpl
+import com.example.daycare.data.reporsitories.ChildrenRepositoryImpl
 import com.example.daycare.data.reporsitories.ProfileRepositoryImpl
-import com.example.daycare.domain.models.Child
-import com.example.daycare.domain.models.Parent
+import com.example.daycare.domain.models.*
 import com.example.daycare.domain.models.Unknown
 import com.example.daycare.domain.repositories.ActivitesRepository
+import com.example.daycare.domain.repositories.ChildrenRepository
 import com.example.daycare.domain.repositories.ProfileRepository
 import com.example.daycare.moshiJsonapi.core.ResourceAdapterFactory
 import com.example.daycare.moshiJsonapi.retrofitConverter.JsonApiConverterFactory
@@ -24,19 +26,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {
-    //    JsonAdapter.Factory jsonApiAdapterFactory =
-//    // ...
-//    .build();
-//    Moshi moshi = new Moshi.Builder()
-//    .add(jsonApiAdapterFactory)
-//    // ...
-//    .build();
+
     @Singleton
     @Provides
     fun adapterFactory() = ResourceAdapterFactory.builder()
-        .add(Parent::class.java)
-        .add(Unknown::class.java)
-        .add(Child::class.java)
+        .add(Parent::class.java,
+        Unknown::class.java,
+        Child::class.java,
+        Group::class.java,
+        ManyParent::class.java)
         .build()
 
     @Singleton
@@ -59,6 +57,10 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun childrenApi(retrofit: Retrofit) =  retrofit.create(ChildrenApi::class.java)
+
+    @Singleton
+    @Provides
     fun activitesApi(retrofit: Retrofit) =  retrofit.create(ActivitiesApi::class.java)
 
     @Singleton
@@ -71,5 +73,11 @@ object AppModule {
     @Provides
     fun activitiesRepository(preferences: Preferences,activitiesApi: ActivitiesApi): ActivitesRepository{
         return ActivitesRepositoryImpl(activitiesApi,preferences)
+    }
+
+    @Singleton
+    @Provides
+    fun childrenRepository(preferences: Preferences,childrenApi: ChildrenApi): ChildrenRepository{
+        return ChildrenRepositoryImpl(childrenApi,preferences)
     }
 }

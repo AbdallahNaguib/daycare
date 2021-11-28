@@ -6,4 +6,5 @@ import com.example.daycare.moshiJsonapi.core.Resource
 @JsonApi(type = "child")
 class Child : Resource() {
     var name: String? = null
+    var parents = ManyParent()
 }
