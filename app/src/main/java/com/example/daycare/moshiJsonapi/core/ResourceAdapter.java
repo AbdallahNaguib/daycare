@@ -208,6 +208,8 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
             } else {
                 if (adapter instanceof ResourceAdapter<?>) {
                     ((ResourceAdapter) adapter).readFields(reader, resource);
+                }else if(adapter instanceof ManyResourceAdapter<?>){
+                    ((ManyResourceAdapter) adapter).readObjects(reader, (Many)resource);
                 }
             }
         }

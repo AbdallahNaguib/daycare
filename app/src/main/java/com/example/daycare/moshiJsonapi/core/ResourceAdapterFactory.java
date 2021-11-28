@@ -2,6 +2,7 @@ package com.example.daycare.moshiJsonapi.core;
 
 import com.squareup.moshi.*;
 import okio.Buffer;
+import timber.log.Timber;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -65,6 +66,9 @@ public final class ResourceAdapterFactory implements JsonAdapter.Factory {
                 }
             }
             return new DocumentAdapter<>(Resource.class, moshi);
+        }
+        if (Many.class.isAssignableFrom(rawType)) {
+            return new ManyResourceAdapter(rawType, jsonNameMapping, moshi);
         }
         if (Resource.class.isAssignableFrom(rawType)) return new ResourceAdapter(rawType, jsonNameMapping, moshi);
         return null;

@@ -11,6 +11,7 @@ import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -19,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ManyResourceAdapter<T extends Many<?>> extends JsonAdapter<T> {
+    private final Constructor<T> constructor;
 
     private final Map<String, FieldAdapter> bindings = new LinkedHashMap<>();
     private final JsonNameMapping jsonNameMapping;
@@ -27,10 +29,19 @@ public class ManyResourceAdapter<T extends Many<?>> extends JsonAdapter<T> {
     private static final int TYPE_RELATIONSHIP = 0x03;
 
     ManyResourceAdapter(Class<T> type, JsonNameMapping jsonNameMapping, Moshi moshi) {
+        try {
+            constructor = type.getDeclaredConstructor();
+            constructor.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalArgumentException("No default constructor on [" + type + "]", e);
+        }
+
         this.jsonNameMapping = jsonNameMapping;
         this.moshi = moshi;
-        Class<?> manyType = type.getSuperclass();
-        Type typeParameter = ((ParameterizedType) manyType).getActualTypeArguments()[0];
+        ParameterizedType superClass = (ParameterizedType) type.getGenericSuperclass();
+        Type actualType = superClass.getActualTypeArguments()[0];
+        Class<?> actualClass = Types.getRawType(actualType);
+        addFields(actualClass);
     }
 
     private void addFields(Class<?> type) {
@@ -57,12 +68,33 @@ public class ManyResourceAdapter<T extends Many<?>> extends JsonAdapter<T> {
     @Nullable
     @Override
     public T fromJson(JsonReader reader) throws IOException {
-
+        return null;
     }
 
+    public void readObjects(JsonReader reader,T resource) throws IOException {
+        reader.beginArray();
+        while (reader.hasNext()){
+            Object object = resource.create();
+            readFields(reader,object);
+        }
+        reader.endArray();
+    }
     @Override
     public void toJson(JsonWriter writer, @Nullable T value) throws IOException {
 
+    }
+
+    private void readFields(JsonReader reader, Object resource) throws IOException {
+        reader.beginObject();
+        while (reader.hasNext()) {
+            FieldAdapter fieldAdapter = bindings.get(reader.nextName());
+            if (fieldAdapter != null) {
+                fieldAdapter.readFrom(reader, resource);
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
     }
 
     private static class FieldAdapter<T> {
@@ -85,36 +117,9 @@ public class ManyResourceAdapter<T extends Many<?>> extends JsonAdapter<T> {
             }
         }
 
-        @SuppressWarnings("unchecked")
-        T get(Object object) {
-            try {
-                return (T) field.get(object);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
         void readFrom(JsonReader reader, Object object) throws IOException {
             set(object, nextNullableObject(reader, adapter));
         }
 
-        void readFromRelation(JsonReader reader, Object object) throws IOException {
-            try {
-                Object target = field.get(object);
-                nextNullableRelationObject(reader, target);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        void nextNullableRelationObject(JsonReader reader, Object resource) throws IOException {
-            if (reader.peek() == JsonReader.Token.NULL) {
-                reader.skipValue();
-            } else {
-                if (adapter instanceof ResourceAdapter<?>) {
-                    ((ResourceAdapter) adapter).readFields(reader, resource);
-                }
-            }
-        }
     }
 }

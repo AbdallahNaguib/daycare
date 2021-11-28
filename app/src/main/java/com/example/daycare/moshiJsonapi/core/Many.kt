@@ -28,7 +28,7 @@ abstract class Many<T : Resource> : Resource(), List<T> {
 
     abstract fun getEmpty():T
 
-    fun create(): ResourceIdentifier {
+    fun create(): T {
         val newInstance = getEmpty()
         list.add(newInstance)
         return newInstance
