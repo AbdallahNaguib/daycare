@@ -13,6 +13,8 @@ import java.util.*;
 import static com.example.daycare.moshiJsonapi.core.MoshiHelper.nextNullableObject;
 import static com.example.daycare.moshiJsonapi.core.MoshiHelper.writeNullable;
 
+import android.util.Log;
+
 public final class ResourceAdapterFactory implements JsonAdapter.Factory {
 
     private Map<String, Class<?>> typeMap = new HashMap<>();
@@ -56,6 +58,7 @@ public final class ResourceAdapterFactory implements JsonAdapter.Factory {
         if (rawType.equals(HasMany.class)) return new HasMany.Adapter(moshi);
         if (rawType.equals(HasOne.class)) return new HasOne.Adapter(moshi);
         if (rawType.equals(Error.class)) return new Error.Adapter(moshi);
+        if (rawType.equals(HashMap.class)) return new HashMapResourceAdapter();
         if (rawType.equals(ResourceIdentifier.class)) return new ResourceIdentifier.Adapter(moshi);
         if (rawType.equals(Resource.class)) return new GenericAdapter(typeMap, moshi);
         if (Document.class.isAssignableFrom(rawType)) {
@@ -97,7 +100,8 @@ public final class ResourceAdapterFactory implements JsonAdapter.Factory {
             Document document = new ObjectDocument<DATA>();
             reader.beginObject();
             while (reader.hasNext()) {
-                switch (reader.nextName()) {
+                String nextName = reader.nextName();
+                switch (nextName) {
                     case "data":
                         if (reader.peek() == JsonReader.Token.BEGIN_ARRAY) {
                             document = document.asArrayDocument();
@@ -143,7 +147,7 @@ public final class ResourceAdapterFactory implements JsonAdapter.Factory {
                         document.setJsonApi(nextNullableObject(reader, jsonBufferJsonAdapter));
                         break;
                     default:
-                        reader.skipValue();
+                        document.setAttributeInMore(nextName,reader.nextString());
                         break;
                 }
             }

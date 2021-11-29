@@ -34,6 +34,8 @@ object AppModule {
         Unknown::class.java,
         Child::class.java,
         Group::class.java,
+        ActivityType::class.java,
+        Activity::class.java,
         ManyParent::class.java)
         .build()
 

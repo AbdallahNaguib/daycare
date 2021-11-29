@@ -6,9 +6,14 @@ import com.example.daycare.moshiJsonapi.core.Resource
 
 @JsonApi(type = "parent")
 class Parent : Resource() {
-    var username: String = ""
-    var image: String = ""
-    var name: String = ""
+    var username: String? = null
+    var image: String? = null
+    var name: String? = null
+
+    val token: String?
+        get() = document.getMore("token")
+    val tenant: String?
+        get() = document.getMore("tenant")
 }
 
 @JsonApi(type = "parents")

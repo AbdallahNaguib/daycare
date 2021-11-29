@@ -73,8 +73,7 @@ class HomePageFragment : DayCareFragment<HomepageFragmentBinding, HomePageViewMo
         if (parent.image != null)
             Glide
                 .with(this)
-                // todo change demo to the real tenant
-                .load(Constants.IMAGE_URL("demo", "small", parent.image!!))
+                .load(Constants.IMAGE_URL(parent.tenant!!, "small", parent.image!!))
                 .centerCrop()
                 .into(binding.profilePic)
     }

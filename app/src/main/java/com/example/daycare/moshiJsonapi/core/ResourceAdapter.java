@@ -1,14 +1,25 @@
 package com.example.daycare.moshiJsonapi.core;
 
-import com.squareup.moshi.*;
+import static com.example.daycare.moshiJsonapi.core.MoshiHelper.nextNullableObject;
+import static com.example.daycare.moshiJsonapi.core.MoshiHelper.nextNullableString;
+import static com.example.daycare.moshiJsonapi.core.MoshiHelper.writeNullable;
+import static com.example.daycare.moshiJsonapi.core.MoshiHelper.writeNullableValue;
+
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.JsonReader;
+import com.squareup.moshi.JsonWriter;
+import com.squareup.moshi.Moshi;
+import com.squareup.moshi.Types;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.*;
-
-import static com.example.daycare.moshiJsonapi.core.MoshiHelper.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
 
@@ -60,7 +71,8 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
         }
         reader.beginObject();
         while (reader.hasNext()) {
-            switch (reader.nextName()) {
+            String nextName = reader.nextName();
+            switch (nextName) {
                 case "id":
                     resource.setId(nextNullableString(reader));
                     break;
@@ -80,7 +92,8 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
                     resource.setLinks(nextNullableObject(reader, jsonBufferJsonAdapter));
                     break;
                 default:
-                    reader.skipValue();
+                    FieldAdapter fieldAdapter = bindings.get(nextName);
+                    readField(fieldAdapter, reader, resource);
                     break;
             }
         }
@@ -105,13 +118,17 @@ class ResourceAdapter<T extends Resource> extends JsonAdapter<T> {
         reader.beginObject();
         while (reader.hasNext()) {
             FieldAdapter fieldAdapter = bindings.get(reader.nextName());
-            if (fieldAdapter != null) {
-                fieldAdapter.readFrom(reader, resource);
-            } else {
-                reader.skipValue();
-            }
+            readField(fieldAdapter, reader, resource);
         }
         reader.endObject();
+    }
+
+    private void readField(FieldAdapter fieldAdapter, JsonReader reader, Object resource) throws IOException {
+        if (fieldAdapter != null) {
+            fieldAdapter.readFrom(reader, resource);
+        } else {
+            reader.skipValue();
+        }
     }
 
     private void readRelation(JsonReader reader, Object resource) throws IOException {

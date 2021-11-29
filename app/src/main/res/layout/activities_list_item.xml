@@ -1,115 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp">
 
-    <TextView
-        android:id="@+id/activityChildTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/child"
-        style="@style/activitiesListItem"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_margin="10dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/activityChildDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        style="@style/activitiesListItem"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/activityChildTitle" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/activityTypeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="@string/type"
-        style="@style/activitiesListItem"
-        app:layout_constraintStart_toStartOf="@+id/activityChildTitle"
-        app:layout_constraintTop_toBottomOf="@+id/activityChildTitle" />
 
-    <TextView
-        android:id="@+id/activityDateTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="@string/date"
-        style="@style/activitiesListItem"
-        app:layout_constraintStart_toStartOf="@+id/activityTypeTitle"
-        app:layout_constraintTop_toBottomOf="@+id/activityTypeTitle" />
+        <TextView
+            android:id="@+id/activityChildTitle"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activityItemMarginTop"
+            android:text="@string/child"
+            app:layout_constraintStart_toStartOf="@+id/imageCard"
+            app:layout_constraintTop_toBottomOf="@+id/imageCard" />
 
-    <TextView
-        android:id="@+id/activityTimeTitle"
-        style="@style/activitiesListItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/main2"
-        android:text="@string/start_time"
-        app:layout_constraintStart_toStartOf="@+id/activityDateTitle"
-        app:layout_constraintTop_toBottomOf="@+id/activityDateTitle" />
+        <TextView
+            android:id="@+id/activityChildDesc"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/imageCard"
+            app:layout_constraintTop_toTopOf="@+id/activityChildTitle" />
 
-    <TextView
-        android:id="@+id/activityTempTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/temperature"
-        style="@style/activitiesListItem"
-        app:layout_constraintStart_toStartOf="@+id/activityTimeTitle"
-        app:layout_constraintTop_toBottomOf="@+id/activityTimeTitle" />
+        <TextView
+            android:id="@+id/activityTypeTitle"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activityItemMarginTop"
+            android:text="@string/type"
+            app:layout_constraintStart_toStartOf="@+id/activityChildTitle"
+            app:layout_constraintTop_toBottomOf="@+id/activityChildTitle" />
 
-    <TextView
-        android:id="@+id/activityTypeDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        style="@style/activitiesListItem"
-        app:layout_constraintEnd_toEndOf="@+id/activityChildDesc"
-        app:layout_constraintTop_toTopOf="@+id/activityTypeTitle" />
+        <TextView
+            android:id="@+id/activityDateTitle"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activityItemMarginTop"
+            android:text="@string/date"
+            app:layout_constraintStart_toStartOf="@+id/activityTypeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/activityTypeTitle" />
 
-    <TextView
-        android:id="@+id/activityDateDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        style="@style/activitiesListItem"
-        android:fontFamily="@font/main2"
-        app:layout_constraintEnd_toEndOf="@+id/activityTypeDesc"
-        app:layout_constraintTop_toTopOf="@+id/activityDateTitle" />
+        <TextView
+            android:id="@+id/activityTimeTitle"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activityItemMarginTop"
+            android:fontFamily="@font/main2"
+            android:text="@string/start_time"
+            app:layout_constraintStart_toStartOf="@+id/activityDateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/activityDateTitle" />
 
-    <TextView
-        android:id="@+id/activityTimeDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/main2"
-        android:text="TextView"
-        style="@style/activitiesListItem"
-        app:layout_constraintEnd_toEndOf="@+id/activityDateDesc"
-        app:layout_constraintTop_toTopOf="@+id/activityTimeTitle" />
 
-    <TextView
-        android:id="@+id/activityTempDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        style="@style/activitiesListItem"
-        app:layout_constraintEnd_toEndOf="@+id/activityTimeDesc"
-        app:layout_constraintTop_toTopOf="@+id/activityTempTitle" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/activityTypeDesc"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/activityChildDesc"
+            app:layout_constraintTop_toTopOf="@+id/activityTypeTitle" />
+
+        <TextView
+            android:id="@+id/activityDateDesc"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/main2"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/activityTypeDesc"
+            app:layout_constraintTop_toTopOf="@+id/activityDateTitle" />
+
+        <TextView
+            android:id="@+id/activityTimeDesc"
+            style="@style/activitiesListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/activityDateDesc"
+            app:layout_constraintTop_toTopOf="@+id/activityTimeTitle" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/others"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/activityTimeDesc"
+            app:layout_constraintStart_toStartOf="@id/activityTimeTitle"
+            app:layout_constraintTop_toBottomOf="@id/activityTimeTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

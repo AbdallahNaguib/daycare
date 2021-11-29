@@ -23,4 +23,7 @@ class Preferences @Inject constructor(@ApplicationContext context: Context){
         val token="223c7a1016a5f9c9737b27d22c156196c81e728d9d4c2f636f067f89cc14862c4d6a5d012215bc7da184c6fe1e7b7b14"
         return token
     }
+    fun getTenant():String{
+        return "demo"
+    }
 }

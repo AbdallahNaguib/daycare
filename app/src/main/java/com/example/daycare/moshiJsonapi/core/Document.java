@@ -1,12 +1,18 @@
 package com.example.daycare.moshiJsonapi.core;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public abstract class Document implements Serializable {
 
     List<Error> errors = new ArrayList<>(0);
     Map<ResourceIdentifier, Resource> included = new HashMap<>(0);
+    private final Map<String, String> more = new HashMap<>(0);
 
     private JsonBuffer meta;
     private JsonBuffer links;
@@ -35,6 +41,14 @@ public abstract class Document implements Serializable {
 
     public boolean addInclude(Resource resource) {
         return getIncluded().add(resource);
+    }
+
+    public void setAttributeInMore(String key, String value) {
+        more.put(key, value);
+    }
+
+    public String getMore(String key) {
+        return more.get(key);
     }
 
     public Collection<Resource> getIncluded() {

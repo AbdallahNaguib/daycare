@@ -12,6 +12,11 @@ class ListChildrenViewModel @Inject constructor(private val loadChildrenUseCase:
     fun loadChildren(){
         loadChildrenUseCase.execute {
             Timber.d("$it")
+            for(child in it){
+                for(parent in child.parents){
+
+                }
+            }
         }
     }
 }

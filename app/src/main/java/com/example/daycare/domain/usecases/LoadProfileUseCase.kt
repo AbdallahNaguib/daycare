@@ -13,8 +13,8 @@ class LoadProfileUseCase @Inject constructor(private val profileRepository: Prof
 
     fun execute(handler: ServerResponseUnauthorizedHandler,onSuccess: (Parent?) -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
-          //  val response = profileRepository.loadProfile().await()
-            onSuccess(Parent())
+            val response = profileRepository.loadProfile().await()
+            onSuccess(response)
         }
     }
 }
