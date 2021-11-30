@@ -1,6 +1,8 @@
 package com.example.daycare.moshiJsonapi.core;
 
+import static com.squareup.moshi.JsonReader.Token.BEGIN_ARRAY;
 import static com.squareup.moshi.JsonReader.Token.BEGIN_OBJECT;
+import static com.squareup.moshi.JsonReader.Token.END_ARRAY;
 
 import androidx.annotation.Nullable;
 
@@ -16,7 +18,11 @@ public class HashMapResourceAdapter extends JsonAdapter<HashMap<String, String>>
     @Override
     public HashMap<String, String> fromJson(JsonReader reader) throws IOException {
         HashMap<String, String> result = new HashMap<>();
-        reader.beginObject();
+        if(reader.peek() == BEGIN_ARRAY){
+            reader.beginArray();
+        }else{
+            reader.beginObject();
+        }
         while (reader.hasNext()) {
             String key = reader.nextName();
             String value = "";
@@ -34,7 +40,11 @@ public class HashMapResourceAdapter extends JsonAdapter<HashMap<String, String>>
             }
             result.put(key, value);
         }
-        reader.endObject();
+        if(reader.peek() == END_ARRAY){
+            reader.endArray();
+        }else{
+            reader.endObject();
+        }
         return result;
     }
 

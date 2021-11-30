@@ -15,4 +15,5 @@ abstract class MyBaseAdapter<T : RecyclerView.ViewHolder>(val layout: Int) :
             .inflate(layout, parent, false)
         return getViewHolder(view)
     }
+
 }

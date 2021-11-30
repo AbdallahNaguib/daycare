@@ -8,9 +8,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ListActivitesUseCase @Inject constructor(private val activitesRepository: ActivitesRepository) {
-    fun execute(onSuccess: (List<Activity>) -> Unit) {
+    fun execute(pageNumber: Int, onSuccess: (List<Activity>) -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
-            val activities = activitesRepository.listActivities().await()
+            val activities = activitesRepository.listActivities(pageNumber).await()
             onSuccess(activities)
         }
     }

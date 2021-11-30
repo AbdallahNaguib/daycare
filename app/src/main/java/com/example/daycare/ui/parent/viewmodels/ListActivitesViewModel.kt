@@ -1,5 +1,6 @@
 package com.example.daycare.ui.parent.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.daycare.data.preferences.Preferences
@@ -13,11 +14,13 @@ class ListActivitesViewModel @Inject constructor(
     private val preferences: Preferences,
     private val listActivitesUseCase: ListActivitesUseCase) :
     ViewModel() {
-    val activitesLiveData = MutableLiveData<List<Activity>>()
+    val _activitesLiveData = MutableLiveData<List<Activity>>()
+    val activitesLiveData:LiveData<List<Activity>> = _activitesLiveData
 
+    var pageNumber = 1
     fun getActivities() {
-        listActivitesUseCase.execute {
-            activitesLiveData.postValue(it)
+        listActivitesUseCase.execute(pageNumber++) {
+            _activitesLiveData.postValue(it)
         }
     }
     fun getTenant():String{

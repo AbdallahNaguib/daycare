@@ -8,7 +8,7 @@ import kotlinx.coroutines.Deferred
 
 class ActivitesRepositoryImpl(val activitiesApi: ActivitiesApi, val preferences: Preferences) :
     ActivitesRepository {
-    override fun listActivities(): Deferred<List<Activity>> {
-        return activitiesApi.listActivites(preferences.getToken())
+    override fun listActivities(pageNumber:Int): Deferred<List<Activity>> {
+        return activitiesApi.listActivites(preferences.getToken(),pageNumber)
     }
 }
