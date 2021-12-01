@@ -6,6 +6,6 @@ import com.example.daycare.moshiJsonapi.core.ResourceIdentifier
 
 @JsonApi(type = "groups")
 class Group : Resource() {
-    var title: String = ""
-    var image: String = ""
+    var title: String? = null
+    var image: String? = null
 }

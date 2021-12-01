@@ -4,5 +4,5 @@ import com.example.daycare.domain.models.Child
 import kotlinx.coroutines.Deferred
 
 interface ChildrenRepository {
-    fun listChildren():Deferred<List<Child>>
+    fun listChildren(page:Int):Deferred<List<Child>>
 }

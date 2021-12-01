@@ -8,12 +8,15 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.325" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.3277777777777778" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.32407407407407407" />
+        <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.31203703703703706" />
         <entry key="app/src/main/res/font/allan_bold.xml" value="0.3212962962962963" />
         <entry key="app/src/main/res/layout/activities_list_item.xml" value="0.31023550724637683" />
         <entry key="app/src/main/res/layout/activity_main_parent.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_text_view_list_item.xml" value="0.30842391304347827" />
+        <entry key="app/src/main/res/layout/children_list_item.xml" value="0.3296875" />
         <entry key="app/src/main/res/layout/homepage_fragment.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/layout/list_activities_fragment.xml" value="0.31521739130434784" />
+        <entry key="app/src/main/res/layout/list_fragment.xml" value="0.3296875" />
         <entry key="app/src/main/res/layout/loading_item.xml" value="0.30344202898550726" />
         <entry key="app/src/main/res/layout/parent_homepage_list_item.xml" value="0.30932971014492755" />
       </map>

@@ -9,8 +9,8 @@ import kotlinx.coroutines.Deferred
 class ChildrenRepositoryImpl(val childrenApi: ChildrenApi, val preferences: Preferences) :
     ChildrenRepository {
 
-    override fun listChildren(): Deferred<List<Child>> {
-        return childrenApi.getChildren(preferences.getToken())
+    override fun listChildren(page:Int): Deferred<List<Child>> {
+        return childrenApi.getChildren(preferences.getToken(),page)
     }
 
 }

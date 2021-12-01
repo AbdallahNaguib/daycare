@@ -21,7 +21,7 @@
         android:id="@+id/listActivitiesFragment"
         android:name="com.example.daycare.ui.parent.fragments.ListActivitiesFragment"
         android:label="ListActivitiesFragment"
-        tools:layout="@layout/list_activities_fragment"/>
+        tools:layout="@layout/list_fragment"/>
     <fragment
         android:id="@+id/listChildrenFragment"
         android:name="com.example.daycare.ui.parent.fragments.ListChildrenFragment"

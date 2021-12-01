@@ -11,16 +11,17 @@ import com.bumptech.glide.RequestManager
 import com.example.daycare.Constants
 import com.example.daycare.R
 import com.example.daycare.domain.models.Activity
-import timber.log.Timber
 
 class ActivitiesListAdapter(
     data: ArrayList<Activity>,
     val tenant: String,
     val requestManager: RequestManager,
     val context: Context,
-    notifyLoadNextPage:()->Unit
 ) :
-    PaginatedListAdapter<ActivitiesListAdapter.ViewHolder,Activity>(data,R.layout.activities_list_item,notifyLoadNextPage) {
+    PaginatedListAdapter<ActivitiesListAdapter.ViewHolder, Activity>(
+        data,
+        R.layout.activities_list_item
+    ) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val child: TextView? = view.findViewById(R.id.activityChildDesc)
@@ -34,9 +35,9 @@ class ActivitiesListAdapter(
     override fun getViewHolder(view: View) = ViewHolder(view)
 
 
-    override fun bindObjectToViewHolder(
-        position: Int,
-        holder: ViewHolder
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int
     ) {
         val item = data[position]
         holder.time?.text = item.time

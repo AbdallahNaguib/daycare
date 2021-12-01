@@ -2,4 +2,7 @@
 <resources>
     <dimen name="upButtonSize">44dp</dimen>
     <dimen name="activityItemMarginTop">8dp</dimen>
+    <dimen name="childrenInfoMarginTop">16dp</dimen>
+    <dimen name="viewDetailsButtonForChildrenMargin">35dp</dimen>
+    <dimen name="childImageSizeInChildrenList">40dp</dimen>
 </resources>

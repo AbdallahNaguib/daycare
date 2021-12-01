@@ -7,9 +7,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoadChildrenUseCase @Inject constructor(private val childrenRepository: ChildrenRepository) {
-    fun execute(onSuccess: (List<Child>) -> Unit) {
+    fun execute(page: Int, onSuccess: (List<Child>) -> Unit) {
         GlobalScope.launch {
-            val children = childrenRepository.listChildren().await()
+            val children = childrenRepository.listChildren(page).await()
             onSuccess(children)
         }
     }
