@@ -10,66 +10,19 @@ import com.example.daycare.domain.models.Activity
 import com.example.daycare.domain.models.Child
 import com.example.daycare.ui.parent.adapters.ActivitiesListAdapter
 import com.example.daycare.ui.parent.adapters.ChildrenListAdapter
+import com.example.daycare.ui.parent.adapters.PaginatedListAdapter
 import com.example.daycare.ui.parent.viewmodels.ListChildrenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ListChildrenFragment :
-    DayCareFragment<ListFragmentBinding, ListChildrenViewModel>(
-        R.layout.list_fragment,
+    ListDataFragment<Child, ListChildrenViewModel>(
         ListChildrenViewModel::class.java
     ) {
 
-    val children = ArrayList<Child>()
-    lateinit var adapter: ChildrenListAdapter
-    private var hasMore = true
-    override fun doOnCreateView() {
-        addUpButtonClickListener()
-        viewModel.loadChildren()
-        addListenerToLoadMoreDataWhenBottomReached()
-        initAdapter()
-        addObservers()
-    }
-
-    private fun initAdapter() {
-        adapter =
-            ChildrenListAdapter(
-                children,
-                Glide.with(this),
-                viewModel.getTenant(),
-            )
-        binding.list.adapter = adapter
-        binding.list.layoutManager = LinearLayoutManager(requireContext())
-    }
-
-    private fun addObservers() {
-        viewModel.childrenLiveData.observe(viewLifecycleOwner) {
-            childrenLoaded(it)
-        }
-    }
-
-    private fun addListenerToLoadMoreDataWhenBottomReached() {
-        binding.list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1) and hasMore) {
-                    viewModel.loadChildren()
-                }
-            }
-        })
-    }
-
-    private fun childrenLoaded(it: List<Child>) {
-        if (it.isEmpty()) {
-            hasMore = false
-        } else {
-            adapter.addMoreData(it)
-        }
-    }
-
-    private fun addUpButtonClickListener() {
-        binding.upButton.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-    }
+    override fun getAdapterObject() = ChildrenListAdapter(
+        data,
+        Glide.with(this),
+        viewModel.getTenant(),
+    )
 }

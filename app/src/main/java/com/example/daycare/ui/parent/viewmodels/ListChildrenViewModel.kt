@@ -1,5 +1,6 @@
 package com.example.daycare.ui.parent.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.daycare.data.preferences.Preferences
@@ -13,15 +14,11 @@ class ListChildrenViewModel @Inject constructor(
     private val loadChildrenUseCase: LoadChildrenUseCase,
     private val preferences: Preferences
 ) :
-    ViewModel() {
+    ListDataViewModel<Child>() {
 
-    var pageNumber: Int = 1
-    private val _childrenLiveData = MutableLiveData<List<Child>>()
-    val childrenLiveData = _childrenLiveData
-
-    fun loadChildren() {
+    override fun listData() {
         loadChildrenUseCase.execute(pageNumber++) {
-            childrenLiveData.postValue(it)
+            _data.postValue(it)
         }
     }
     fun getTenant() = preferences.getTenant()

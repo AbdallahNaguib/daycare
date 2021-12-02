@@ -13,14 +13,11 @@ import javax.inject.Inject
 class ListActivitesViewModel @Inject constructor(
     private val preferences: Preferences,
     private val listActivitesUseCase: ListActivitesUseCase) :
-    ViewModel() {
-    val _activitesLiveData = MutableLiveData<List<Activity>>()
-    val activitesLiveData:LiveData<List<Activity>> = _activitesLiveData
+    ListDataViewModel<Activity>() {
 
-    var pageNumber = 1
-    fun getActivities() {
+    override fun listData() {
         listActivitesUseCase.execute(pageNumber++) {
-            _activitesLiveData.postValue(it)
+            _data.postValue(it)
         }
     }
     fun getTenant():String{

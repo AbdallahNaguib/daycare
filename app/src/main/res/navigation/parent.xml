@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_listChildrenFragment"
             app:destination="@id/listChildrenFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_listAbsencesFragment"
+            app:destination="@id/listAbsencesFragment" />
     </fragment>
     <fragment
         android:id="@+id/listActivitiesFragment"
@@ -26,5 +29,12 @@
         android:id="@+id/listChildrenFragment"
         android:name="com.example.daycare.ui.parent.fragments.ListChildrenFragment"
         android:label="ListChildrenFragment"
+        tools:layout="@layout/list_fragment"
+        />
+    <fragment
+        android:id="@+id/listAbsencesFragment"
+        android:name="com.example.daycare.ui.parent.fragments.ListAbsencesFragment"
+        android:label="ListAbsencesFragment"
+        tools:layout="@layout/list_fragment"
         />
 </navigation>

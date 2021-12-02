@@ -17,7 +17,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:src="@drawable/profile_pic_placeholder"
+            tools:src="@drawable/profile_pic_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="abdallah naguib"
+            tools:text="abdallah naguib"
             style="@style/subLabel"
             app:layout_constraintBottom_toBottomOf="@+id/profilePic"
             app:layout_constraintStart_toEndOf="@+id/profilePic"

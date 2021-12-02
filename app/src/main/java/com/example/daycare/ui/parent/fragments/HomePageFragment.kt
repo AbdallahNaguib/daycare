@@ -40,7 +40,9 @@ class HomePageFragment : DayCareFragment<HomepageFragmentBinding, HomePageViewMo
             actionsList.add(HomePageAction(R.drawable.my_children, "My children") {
                 navigateToChildren()
             })
-            actionsList.add(HomePageAction(R.drawable.absences, "Absences"))
+            actionsList.add(HomePageAction(R.drawable.absences, "Absences"){
+                navigateToAbsences()
+            })
             actionsList.add(HomePageAction(R.drawable.certificates, "Certificates"))
             actionsList.add(HomePageAction(R.drawable.learning_material, "Learning Material"))
             actionsList.add(HomePageAction(R.drawable.online_class, "Online Sessions"))
@@ -49,6 +51,11 @@ class HomePageFragment : DayCareFragment<HomepageFragmentBinding, HomePageViewMo
             actionsList.add(HomePageAction(R.drawable.event, "Events"))
             actionsList.add(HomePageAction(R.drawable.posts, "Posts"))
         }
+    }
+
+    private fun navigateToAbsences() {
+        NavHostFragment.findNavController(this)
+            .navigate(R.id.action_homePageFragment_to_listAbsencesFragment)
     }
 
     private fun navigateToChildren() {

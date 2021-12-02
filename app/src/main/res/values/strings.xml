@@ -10,4 +10,5 @@
     <string name="blood_group">Blood Group</string>
     <string name="classLabel">Class</string>
     <string name="view_details">View Details</string>
+    <string name="comment">Comment</string>
 </resources>
