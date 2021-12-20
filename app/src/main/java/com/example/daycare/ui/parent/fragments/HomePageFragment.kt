@@ -40,17 +40,22 @@ class HomePageFragment : DayCareFragment<HomepageFragmentBinding, HomePageViewMo
             actionsList.add(HomePageAction(R.drawable.my_children, "My children") {
                 navigateToChildren()
             })
-            actionsList.add(HomePageAction(R.drawable.absences, "Absences"){
+            actionsList.add(HomePageAction(R.drawable.absences, "Absences") {
                 navigateToAbsences()
             })
-            actionsList.add(HomePageAction(R.drawable.certificates, "Certificates"))
-            actionsList.add(HomePageAction(R.drawable.learning_material, "Learning Material"))
+            actionsList.add(HomePageAction(R.drawable.learning_material, "Learning Material") {
+                navigateToMaterials()
+            })
             actionsList.add(HomePageAction(R.drawable.online_class, "Online Sessions"))
             actionsList.add(HomePageAction(R.drawable.invoices, "Invoices"))
             actionsList.add(HomePageAction(R.drawable.calender, "Calendar"))
             actionsList.add(HomePageAction(R.drawable.event, "Events"))
-            actionsList.add(HomePageAction(R.drawable.posts, "Posts"))
         }
+    }
+
+    private fun navigateToMaterials() {
+        NavHostFragment.findNavController(this)
+            .navigate(R.id.action_homePageFragment_to_listMaterialsFragment)
     }
 
     private fun navigateToAbsences() {

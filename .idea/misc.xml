@@ -16,10 +16,12 @@
         <entry key="app/src/main/res/layout/activity_text_view_list_item.xml" value="0.30842391304347827" />
         <entry key="app/src/main/res/layout/children_list_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/homepage_fragment.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/learning_material_item_list.xml" value="0.32653985507246375" />
         <entry key="app/src/main/res/layout/list_activities_fragment.xml" value="0.31521739130434784" />
         <entry key="app/src/main/res/layout/list_fragment.xml" value="0.3296875" />
         <entry key="app/src/main/res/layout/loading_item.xml" value="0.30344202898550726" />
         <entry key="app/src/main/res/layout/parent_homepage_list_item.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/session_item_list.xml" value="0.23596014492753623" />
       </map>
     </option>
   </component>

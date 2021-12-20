@@ -11,4 +11,9 @@
     <string name="classLabel">Class</string>
     <string name="view_details">View Details</string>
     <string name="comment">Comment</string>
+    <string name="subject">Subject</string>
+    <string name="attachment">Attachment</string>
+    <string name="download">Download</string>
+    <string name="join_now">Join Now</string>
+    <string name="repeated_at">Repeated At</string>
 </resources>

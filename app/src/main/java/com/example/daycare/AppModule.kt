@@ -1,20 +1,11 @@
 package com.example.daycare
 
-import com.example.daycare.data.network.APIs.AbsencesApi
-import com.example.daycare.data.network.APIs.ActivitiesApi
-import com.example.daycare.data.network.APIs.ChildrenApi
-import com.example.daycare.data.network.APIs.ProfileApi
+import com.example.daycare.data.network.APIs.*
 import com.example.daycare.data.preferences.Preferences
-import com.example.daycare.data.reporsitories.AbsencesRepositoryImpl
-import com.example.daycare.data.reporsitories.ActivitesRepositoryImpl
-import com.example.daycare.data.reporsitories.ChildrenRepositoryImpl
-import com.example.daycare.data.reporsitories.ProfileRepositoryImpl
+import com.example.daycare.data.reporsitories.*
 import com.example.daycare.domain.models.*
 import com.example.daycare.domain.models.Unknown
-import com.example.daycare.domain.repositories.AbsencesRepository
-import com.example.daycare.domain.repositories.ActivitesRepository
-import com.example.daycare.domain.repositories.ChildrenRepository
-import com.example.daycare.domain.repositories.ProfileRepository
+import com.example.daycare.domain.repositories.*
 import com.example.daycare.moshiJsonapi.core.ResourceAdapterFactory
 import com.example.daycare.moshiJsonapi.retrofitConverter.JsonApiConverterFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -71,7 +62,15 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun sessionsApi(retrofit: Retrofit) =  retrofit.create(SessionsApi::class.java)
+
+    @Singleton
+    @Provides
     fun absencesApi(retrofit: Retrofit) =  retrofit.create(AbsencesApi::class.java)
+
+    @Singleton
+    @Provides
+    fun materialsApi(retrofit: Retrofit) =  retrofit.create(MaterialsApi::class.java)
 
     @Singleton
     @Provides
@@ -89,6 +88,12 @@ object AppModule {
     @Provides
     fun absencesRepository(preferences: Preferences,absencesApi: AbsencesApi): AbsencesRepository{
         return AbsencesRepositoryImpl(absencesApi,preferences)
+    }
+
+    @Singleton
+    @Provides
+    fun materialsRepository(preferences: Preferences,materialsApi: MaterialsApi): MaterialsRepository{
+        return MaterialsRepositoryImpl(materialsApi,preferences)
     }
 
     @Singleton
