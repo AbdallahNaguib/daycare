@@ -16,4 +16,5 @@
     <string name="download">Download</string>
     <string name="join_now">Join Now</string>
     <string name="repeated_at">Repeated At</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

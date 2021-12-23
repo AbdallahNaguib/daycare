@@ -1,92 +1,75 @@
 package com.example.daycare.ui.parent.fragments
 
-import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
-import com.example.daycare.Constants
-import com.example.daycare.R
-import com.example.daycare.databinding.HomepageFragmentBinding
-import com.example.daycare.domain.models.Parent
-import com.example.daycare.ui.models.HomePageAction
-import com.example.daycare.ui.parent.adapters.HomePageAdapter
-import com.example.daycare.ui.parent.viewmodels.HomePageViewModel
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
+import androidx.fragment.app.Fragment
+import coil.compose.rememberImagePainter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomePageFragment : DayCareFragment<HomepageFragmentBinding, HomePageViewModel>(
-    R.layout.homepage_fragment,
-    HomePageViewModel::class.java
-) {
-    var actionsList = ArrayList<HomePageAction>()
-    lateinit var homePageAdapter: HomePageAdapter
-
-    override fun doOnCreateView() {
-        initActionsList()
-        initActionsAdapter()
-        loadUserProfile()
-    }
-
-    private fun initActionsAdapter() {
-        homePageAdapter = HomePageAdapter(actionsList)
-        binding.actionsList.adapter = homePageAdapter
-        binding.actionsList.layoutManager = GridLayoutManager(requireContext(),2)
-    }
-
-    private fun initActionsList() {
-        if (actionsList.isEmpty()) {
-            actionsList.add(HomePageAction(R.drawable.activities, "Daily Activities") {
-                navigateToActivites()
-            })
-            actionsList.add(HomePageAction(R.drawable.my_children, "My children") {
-                navigateToChildren()
-            })
-            actionsList.add(HomePageAction(R.drawable.absences, "Absences") {
-                navigateToAbsences()
-            })
-            actionsList.add(HomePageAction(R.drawable.learning_material, "Learning Material") {
-                navigateToMaterials()
-            })
-            actionsList.add(HomePageAction(R.drawable.online_class, "Online Sessions"))
-            actionsList.add(HomePageAction(R.drawable.invoices, "Invoices"))
-            actionsList.add(HomePageAction(R.drawable.calender, "Calendar"))
-            actionsList.add(HomePageAction(R.drawable.event, "Events"))
+class HomePageFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                MainUI()
+            }
         }
     }
 
-    private fun navigateToMaterials() {
-        NavHostFragment.findNavController(this)
-            .navigate(R.id.action_homePageFragment_to_listMaterialsFragment)
-    }
 
-    private fun navigateToAbsences() {
-        NavHostFragment.findNavController(this)
-            .navigate(R.id.action_homePageFragment_to_listAbsencesFragment)
+}
+@ExperimentalFoundationApi
+@Composable
+fun MainUI() {
+    Column(modifier = Modifier.padding(12.dp)) {
+        ProfileInfo()
+        ParentActions()
     }
+}
 
-    private fun navigateToChildren() {
-        NavHostFragment.findNavController(this)
-            .navigate(R.id.action_homePageFragment_to_listChildrenFragment)
+@Composable
+fun ProfileInfo() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        // profile pic
+        Image(
+            painter = rememberImagePainter("https://miro.medium.com/max/1080/1*osc1NdwrqJjJuGR1XZsmlg.jpeg"),
+            contentDescription = "profile pic",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(50.dp)
+                .clip(CircleShape)
+        )
+        // user name
+        Text(text = "Parent", modifier = Modifier.padding(start = 12.dp))
     }
+}
+@ExperimentalFoundationApi
+@Composable
+fun ParentActions(){
+    LazyVerticalGrid(cells = GridCells.Fixed(2), modifier = Modifier.padding(top = 30.dp)) {
 
-    private fun navigateToActivites() {
-        NavHostFragment.findNavController(this)
-            .navigate(R.id.action_homePageFragment_to_listActivitiesFragment)
-    }
-
-    private fun loadUserProfile() {
-        viewModel.parentLiveData.observe(viewLifecycleOwner) {
-            binding.userName.text = it.name
-            setProfilePic(it)
-        }
-        viewModel.loadProfile()
-    }
-
-    private fun setProfilePic(parent: Parent) {
-        if (parent.image != null)
-            Glide
-                .with(this)
-                .load(Constants.IMAGE_URL(parent.tenant!!, "small", parent.image!!))
-                .centerCrop()
-                .into(binding.profilePic)
     }
 }
